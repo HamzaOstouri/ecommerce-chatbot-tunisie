@@ -1,0 +1,18 @@
+.chatbotApp{
+    background-image: url("https://www.exoplatform.com/blog/wp-content/uploads/2018/06/CHATBOT-800x533.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    /* width: 100%; */
+}
+.chatbotApp .chatbot{
+    display: flex;
+    justify-content: center;
+    /* flex-direction: row; */
+}
+
+/* .chatbot .right {
+    background-image: url("../../../img/background2.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover; 
+} */

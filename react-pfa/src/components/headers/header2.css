@@ -1,0 +1,101 @@
+header{
+    min-height: 70px;
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+    background-color: rgb(202, 202, 202);
+}
+header .logo{
+    flex: 1;
+
+    /* display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-right: 10px;
+    margin-left: 30px;
+    margin: auto;
+    height: 100px;
+
+    place-items: initial;
+    flex-direction: row; */
+    /* justify-items: center; */
+}
+header .logo h2 {
+    flex-direction: row;
+    /* margin-left: -50px; */
+    /* flex-wrap: wrap; */
+    /* position: relative; */
+    /* top: 50px; */
+    /* display: block; */
+    margin-right: 500px;
+    font-size: 20px;
+    margin-left: 10px;
+    padding-top: 15px;
+    color: "#fff";
+}
+header .logo .login__logo{
+    /* position: left; */
+    /* top: 50px; */
+    width: 100px;
+    height: 80px;
+    flex-direction: center;
+    align-items: center;
+    /* margin-right: 20px; */
+    /* margin-top: 100px ; */
+    margin: 60px ;
+    padding: 0;
+}
+header a{
+    text-transform: uppercase;
+    color: rgb(116, 5, 5);
+    /* top: 15px; */
+}
+header li a{
+    color: black;
+
+}
+header ul {
+    margin: 40px 0 0 100px;
+    /* top bottom right left */
+}
+/* header ul .login__logo {
+    width: 100px;
+    height: 80px;
+    margin: 30px 0 0 50px; 
+} */
+ /* flex-direction: center; */
+    /* align-items: center; */
+    /* margin: 60px ; */
+header ul li{
+    display: inline-flex;
+    opacity: 0.9;
+    padding: 0 30px;
+    /* 0 for top and bottom and 40px for left and right  */
+    /* padding-bottom: 50px; */
+    /* padding-left: 20px; */
+}
+header ul li:hover{
+    opacity: 1;
+}
+.menu{
+    display: none;
+}
+.cart-icon{
+    position: relative;
+    margin-right: 30px;
+    padding-bottom: 50px;
+}
+.cart-icon span{
+    background: crimson;
+    border-radius: 20px;
+    color: white;
+    position: absolute;
+    top:-10px;
+    right: -10px;
+    padding: 5px 7px;
+    font-size: 10px;
+}

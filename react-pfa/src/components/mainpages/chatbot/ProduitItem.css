@@ -1,0 +1,33 @@
+.produit-item {
+   background-color: rgba(138, 1, 1, 0.582);
+   max-width: 400px;
+   /* margin: 20px; */
+}
+
+.detail-cart{
+    border: rgb(243, 188, 7) 1px solid;
+    /* max-width: 500px; */
+    width: 360px;
+    max-width: 400px;
+}
+.detail-cart > img {
+    /* max-width: 300px;
+    max-height: 200px; */
+    height: 180px;
+    margin: 10px 0;
+    width: 90%;
+    /* text-align: center; */
+    margin-left: 18px;
+    /* position: center; */
+}
+
+.box-detail {
+    font-size: 16px;
+    width: 250px;
+    text-align: center;
+}
+.box-detail h2 {
+    font-size: 18px;
+    color: rgb(5, 7, 117);
+    
+}
