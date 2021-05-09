@@ -31,10 +31,10 @@ function OrderHistory() {
 
     return (
         <div className="history-page">
-            <h2>History</h2>
+            <h2>Historique</h2>
 
             {/* <h4>You have {history.length} ordered</h4> */}
-            <h4>Vous avez commandé {history.length} produit(s)</h4>
+            {isAdmin ? <h2>{history.length} les achats qui ont été validées </h2>:<h4>les produits Vous avez acheté {history.length} commande(s)</h4>}
 
 
             <table>
@@ -42,9 +42,9 @@ function OrderHistory() {
                     <tr>
                         {/* <th>Payment ID</th> */}
                         {/* <th>Date of Purchased</th> */}
-                        <th>ID payement</th>
+                        <th>Id de payement</th>
                         <th>Date d'achat</th>
-                        <th></th>
+                        <th>Voir détails</th>
                     </tr>
                 </thead>
                 <tbody>

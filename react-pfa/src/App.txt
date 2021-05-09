@@ -1,0 +1,17 @@
+import React from 'react';  
+// import logo from './logo.svg';  
+import './App.css';  
+import Layout  from './Layout/Layout'  
+// import Login from "./Login";  
+import { BrowserRouter as Router, HashRouter, Route, Switch } from 'react-router-dom';  
+function App() {  
+  return (  
+     <div className="App">  
+     <Router>
+      <Layout/>   
+      </Router>
+     </div>  
+  );  
+}  
+  
+export default App; 

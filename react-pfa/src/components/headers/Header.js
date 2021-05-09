@@ -7,23 +7,21 @@ import Cart from './icon/cart.svg'
 import {Link} from 'react-router-dom'
 import axios from 'axios'
 import './header.css';
-
+import Clock from './Clock'
 
 
 function Header() {
-    const [user, setUser] = useState({
-        email: "hamzashadow47",
-        password: "",
-      });
+    // const [user, setUser] = useState({
+    //     email: "hamzashadow47",
+    //     password: "",
+    //   });
     //   console.log( "user >>>", user);
     const state = useContext(GlobalState)
     const [isLogged] = state.userAPI.isLogged
-
     const [isAdmin] = state.userAPI.isAdmin
     // const [email, setEmail] = useState(state.userAPI.isAdmin)
     const [cart] = state.userAPI.cart
-    // const [users] = state.userAPI.user
-    // const [user] = state.userAPI.cart
+    // const [user] = state.userAPI.user
     const [menu, setMenu] = useState(false)
 
     const logoutUser = async () =>{
@@ -39,8 +37,10 @@ function Header() {
             <>
                 {/* <li>hello {email}</li> */}
                 <li><Link to="/create_product">Créer Produits</Link></li>
-                <li><Link to="/category">Créer Catégories</Link></li>
-                <li><Link to="/handle_accounts">Gérer les comptes</Link></li>
+                <li><Link to="/category">Gérer Catégories</Link></li>
+                <li><Link to="/handle_accounts">Gérer Comptes</Link></li>
+                <li><Link to="/history">Historiques</Link></li>
+                <li><Link to="/" onClick={logoutUser}>Logout</Link></li>
             </>
         )
     }
@@ -50,8 +50,9 @@ function Header() {
             <>       
                 {/* <li><Link to="/payment">payement</Link></li> */}
                 {/* <li>Hello {users}</li> */}
-                <li><Link to="/history">Histoire</Link></li>
+                <li><Link to="/history">Historique</Link></li>
                 <li><Link to="/chatbot">🤖Buy with Chatbot</Link></li>
+                <li><Link to="/template">Contact us</Link></li>
                 <li><Link to="/" onClick={logoutUser}>Logout</Link></li>
             </>
         )
@@ -84,7 +85,7 @@ function Header() {
                 </div> 
                 <div>
                 <h2>
-                    <Link to="/">{isAdmin ? 'Espace Admin' : "Le 1er site E-Commerce en Tunisie"}</Link>
+                    <Link to="/">{isAdmin ? 'Espace Admin' : "site #1 en Tunisie"}</Link>
                 </h2>
                 </div> 
             </div>
@@ -92,14 +93,16 @@ function Header() {
             <ul style={styleMenu}>
                 <li><Link to="/">{isAdmin ? 'Voir Produits' : 'Home'}</Link></li>
                 
-                {isAdmin && adminRouter()}
+                {/* {isAdmin && adminRouter()}
+                {/* {isLogged && isAdmin ? adminRouter() :  <li><Link to="/" onClick={logoutUser}>Logout</Link></li>} */}
 
-                {
-                    isLogged ? loggedRouter() : <li><Link to="/login">Login ✥ Register</Link></li>
-                    //   {/* <li><Link to="/chatbot">🤖Chatbot</Link></li> </div> */}
-              
+                {/* {
+                    isLogged  ? loggedRouter() : <li><Link to="/login">Login ✥ Register</Link></li>
+                }  */}
+
+                {isLogged ? 
+                    isAdmin ? adminRouter() : loggedRouter(): <li><Link to="/login">Login ✥ Register</Link></li>
                 }
-
               
                 <li onClick={() => setMenu(!menu)}>
                     <img src={Close} alt="" width="30" className="menu" />
@@ -118,6 +121,7 @@ function Header() {
             }    
             
             {/* <Datetime /> */}
+            <Clock />
 
         </header>
     )

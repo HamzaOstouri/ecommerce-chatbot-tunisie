@@ -6,6 +6,7 @@ export default class PaypalButton extends React.Component {
         const onSuccess = (payment) => {
             // Congratulation, it came here means everything's fine!
             		console.log("The payment was succeeded!", payment);
+                    // alert("yeah boy")
                     // You can bind the "payment" object's value to your state or props or whatever here, please see below for sample returned data
                     this.props.tranSuccess(payment)
         }
@@ -30,11 +31,12 @@ export default class PaypalButton extends React.Component {
  
         const client = {
             // sandbox:    'YOUR-sandbox-APP-ID',
-            // sandbox: 'sb-wmqkp5881615@business.example.com',
+            // sandbox: 'AQ_qzkdAaG-epAIJQY6I_ZMZeehQ128rcb-ctqFirn5MU0iaG_aUihlO361uID_K1V6wnSCgTUG2AfRc',
             // sandbox: 'ecommerce-chatbot-mern',
-            sandbox: 'APP-80W284485P519543T',
-            client_id : 'AQ_qzkdAaG-epAIJQY6I_ZMZeehQ128rcb-ctqFirn5MU0iaG_aUihlO361uID_K1V6wnSCgTUG2AfRc',
-            // production: 'YOUR-PRODUCTION-APP-ID',
+            // client_id : '',
+            // e-commerce-chatbot-pfa app
+            sandbox : 'ASZwEzDh4Ay7XI-csHE24XOcscxaLGH6MtcaG6ig7JMCwrKw5LKJ7kATgLf-wv5T67HoO6M-jldoTuPM',
+            production: 'YOUR-PRODUCTION-APP-ID',
         }
         // In order to get production's app-ID, you will have to send your app to Paypal for approval first
         // For sandbox app-ID (after logging into your developer account, please locate the "REST API apps" section, click "Create App"):

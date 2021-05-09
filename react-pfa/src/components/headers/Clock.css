@@ -1,0 +1,31 @@
+/* body {
+    background: black;
+} */
+
+/* .clock { */
+.App-clock {
+    flex: content;
+    width: 350px;
+    /* height: 250px; */
+    /* position: absolute; */
+    /* top: 50%;
+    left: 50%; */
+    /* transform: translateX(-50%) translateY(-50%); */
+    color: #0f738a;
+    font-size: 20px;
+    /* margin-left: 30px; */
+    text-align: center;
+    font-family: Orbitron;
+    letter-spacing: 3px;
+
+    display: inline-block;
+    /* flex-direction: row; */
+    /* flex-wrap: wrap; */
+    opacity: 0.9;
+    padding: 0 20px;
+    margin-bottom: 50px;
+    /* font-family: Arial, Helvetica, sans-serif; */
+    font-weight: 500;
+   
+
+}

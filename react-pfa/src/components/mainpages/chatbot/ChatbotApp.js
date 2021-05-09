@@ -1,21 +1,28 @@
-import React from "react";
-// import React, {useContext, useState, useEffect} from "react";
+// import React from "react";
+import React, {useContext, useState, useEffect} from "react";
 
 // import Chatbot from "react-chatbot-kit";
-// import config from "./chatbot/config";
-// import ActionProvider from "./chatbot/ActionProvider";
-// import MessageParser from "./chatbot/MessageParser";
 import validator from "validator";
 import { ThemeProvider } from "styled-components";
 import ChatBot from "react-simple-chatbot";
 import ProduitItem from "./ProduitItem";
+import PaypalButton from "./PaypalButton"
+// import Cart from "../cart/Cart"
+import {GlobalState} from '../../../GlobalState'
+import axios from 'axios'
+
+
 // import "./ChatbotApp.css";
-// import Payment from "../payment/Payment";
 // import 'bootstrap/dist/css/bootstrap.min.css';
 
 import {Link} from 'react-router-dom';
 
 function ChatbotApp() {
+
+    const state = useContext(GlobalState)
+    const [cart, setCart] = state.userAPI.cart
+    const [token] = state.token
+    const [total, setTotal] = useState(0)
 
     const config = {
         width: "500px",
@@ -54,9 +61,45 @@ function ChatbotApp() {
         userFontColor: "#4c4c4c"
     };
 
+    useEffect(() =>{
+        const getTotal = () =>{
+            const total = cart.reduce((prev, item) => {
+                return prev + (item.price * item.quantity)
+            },0)
 
-    // var today = new Date();
-    // const today = new Date("1997,10,01");
+            setTotal(total)
+        }
+
+        getTotal()
+
+    },[cart])
+
+    const addToCart = async (cart) =>{
+        await axios.patch('/user/addcart', {cart}, {
+            headers: {Authorization: token}
+        })
+    }
+
+    const tranSuccess = async(payment) => {
+        const {paymentID, address} = payment;
+
+        await axios.post('/api/payment', {cart, paymentID, address}, {
+            headers: {Authorization: token}
+        })
+
+        setCart([])
+        addToCart([])
+        alert("payement est fait avec succés . consulter vos histoires !!")
+    }
+
+
+    var today = new Date(); //Current DAY
+    // const today = new Date(year,month,day);
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var yyyy = today.getFullYear();
+
+    today = yyyy + '/' + mm + '/' + dd;
 
   
     const steps = [
@@ -82,12 +125,12 @@ function ChatbotApp() {
                 options: [
                     {
                         value: "oui",
-                        label: "oui",
+                        label: "oui je suis certain",
                         trigger: "choose payment method"
                     },
                     {
                         value: "non",
-                        label: "no i changed my mind",
+                        label: "non j'ai changé mon avis",
                         trigger: "done"
                     },
                 ]
@@ -118,6 +161,7 @@ function ChatbotApp() {
                         value:"paypal",
                         label: "PayPal",
                         trigger: "continue with paypal"
+                        // trigger: "payment method",
                         // trigger: "demander date d expiration"
                     },
                     {
@@ -185,7 +229,7 @@ function ChatbotApp() {
                 id:"entrer date d expiration",
                 user: true,
                 validator : (value) => {
-                    if (! validator.isDate(value) || value < "10/04/2021") { 
+                    if (! validator.isDate(value) || value < today) { 
                         // "2021/04/10"
                         // if it's false enter a valid date ... replace with today
                         return "svp entrez date valide !";
@@ -231,7 +275,7 @@ function ChatbotApp() {
             {
                 id:"checking",
                 message: "thank you sir please wait to confirm your master card payment",
-                trigger: "done"
+                trigger: "payment method"
             },
             // visa method
             {
@@ -262,7 +306,7 @@ function ChatbotApp() {
                 user: true,
                 validator: (value) => {
                     if (isNaN(value) || value.length !==8) {
-                        return 'value should be a number of 8'; 
+                        return 'il faut numero de 8 chiffres !'; 
                     }
                     return true;                
                 },
@@ -274,10 +318,15 @@ function ChatbotApp() {
             {
                 id: 'payment method',
                 component: (
-                <button className="btn btn-danger"><Link path to="/payment">pay now</Link>
-                </button>
+                    <div >
+                        {/* <h3>Total: {total} TND</h3> */}
+                    {/* <button className="btn btn-danger"><Link path to="/payment">pay now</Link>
+                    </button> */}
+                       
+                        <Link path to="/cart">checkout now</Link>
+                    </div>
+                // <Cart />
                 ),
-                // component: <Payment />,
                 trigger: 'done',
 
             },
@@ -289,22 +338,20 @@ function ChatbotApp() {
         ]
 
     return (
-        <div className="chatbotApp">
-            {/* <img 
-                // src="../../../img/background2.jpg"
-                // src="https://image.shutterstock.com/image-photo/artificial-intelligenceai-chat-bot-conceptcloseup-260nw-1296329692.jpg"
-                src="https://www.exoplatform.com/blog/wp-content/uploads/2018/06/CHATBOT-800x533.png"
-                alt="koura"
-                // style={{backgroundSize:"100%"}}
-            /> */}
-            <div style={{width:"200px"}}> </div>
+        // <div className="chatbotApp">
+            
             <div className="chatbot">
                 <ThemeProvider theme={theme} >
                     <ChatBot steps={steps} {...config} />
+          
                 </ThemeProvider>
+                
+                {/* <PaypalButton 
+                            total={total}
+                            tranSuccess={tranSuccess} 
+                        /> */}
             </div>
-            <div style={{width:"200px"}}>  </div>
-        </div>
+        // </div>
     );
 
 }

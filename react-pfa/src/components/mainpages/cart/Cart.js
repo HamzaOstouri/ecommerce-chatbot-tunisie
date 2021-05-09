@@ -2,15 +2,12 @@ import React, {useContext, useState, useEffect} from 'react'
 import {GlobalState} from '../../../GlobalState'
 import axios from 'axios'
 import PaypalButton from './PaypalButton'
-// import {useHistory} from "react-router-dom"
-import ChatbotCart from '../chatbot/ChatbotCart'
-
-// import {Button} from "react-bootstrap";
+import ChatbotCart from '../chatbot/ChatbotCart';
+import {Link} from "react-router-dom"
 
 function Cart() {
 
     const state = useContext(GlobalState)
-    // const history = useHistory();
     const [cart, setCart] = state.userAPI.cart
     const [token] = state.token
     const [total, setTotal] = useState(0)
@@ -79,7 +76,8 @@ function Cart() {
 
         setCart([])
         addToCart([])
-        alert("produit ajouté avec succés !")
+        // alert("produit ajouté avec succés !")
+        alert("payement est fait avec succés . consulter vos histoires !!")
     }
 
     if(cart.length === 0) 
@@ -122,10 +120,11 @@ function Cart() {
             <div className="total">
                 <h3>Total: {total} TND</h3>
                 
-                {/* <Link to="/payment"> </Link> */}
+                <Link to="/paypal"> 
                     <PaypalButton
                     total={total}
                     tranSuccess={tranSuccess} />
+                </Link>
                                
 
                 {/* <button onClick={() => history.push("/payment")}>

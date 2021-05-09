@@ -1,11 +1,14 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useContext } from "react";
+// import { Link } from "react-router-dom";
 import axios from "axios";
 import {GlobalState} from '../../../GlobalState'
-import Loading from '../utils/loading/Loading'
+// import Loading from '../utils/loading/Loading'
 import './CrudAccounts.css';
 
 function CrudAccounts() {
+  const state = useContext(GlobalState);
+  const [users] = state.userAPI.user;
+
   const [user, setUser] = useState({
     name: "",
     email: "",
@@ -32,19 +35,48 @@ function CrudAccounts() {
   };
 
   return (
-    // <div className="login-page">
     <div className="crud-account">
-        <h1>Bienvenue Admin </h1>
-      {/* <Link to="/">
-        <img
-          className="login-logo"
-          alt= "amazon"
-          src="http://www.star-dev.net/wp-content/uploads/2016/07/Logo-e-commerce-english.jpg"
-        />
-      </Link> */}
-      <div className="login-container">
+
+      <h1>Bienvenue Admin</h1>
+      <div className="list-user">
+        <h2>liste Users</h2>
+        <table style={{margin: "30px 0px"}}>
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>username</th>
+                    <th>email</th>
+                    <th>password</th>
+                </tr>
+            </thead>
+            <tbody>
+                {
+                    // orderDetails.cart.map(item =>(
+                    <tr key={users._id}>
+                        {/* <td><img src={item.images.url} alt="" /></td> */}
+                        <td>{users.name}</td>
+                        <td>{users.email}</td>
+                        <td>{users.password}</td>
+                    </tr>
+                    
+                }
+                {/* {
+                    users.map(item =>(
+                    <tr key={item._id}>
+                        <td>{item.name}</td>
+                        <td>{item.email}</td>
+                        <td>{item.password}</td>
+                    </tr>
+                    ))
+                } */}
+                
+            </tbody>
+        </table>
+      </div>
+
+      <div className="login__container">
         <form onSubmit={registerSubmit} className="form">
-          <h2>Register</h2>
+          <h2>Creer user</h2>
           <input
             type="text"
             name="name"
@@ -77,12 +109,11 @@ function CrudAccounts() {
             <button className="login__registerButton" type="submit">
               Créer User
             </button>
-            {/* <button className="login__signInButton">
-              <Link to="/login">Login</Link>
-            </button> */}
           </div>
         </form>
       </div>
+      {/* <Link class="nav-link" to="/color"> <i class="fas fa-fw fa-chart-area"></i>Colors</Link>  */}
+      {/* <Link><i>Ha</i></Link> */}
     </div>
   );
 }

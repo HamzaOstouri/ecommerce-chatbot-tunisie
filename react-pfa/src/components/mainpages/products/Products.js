@@ -5,7 +5,13 @@ import Loading from '../utils/loading/Loading'
 import axios from 'axios'
 import Filters from './Filters'
 import LoadMore from './LoadMore'
+import Footer from './Footer'
+import Leftside from './Leftside'
+// import Leftside from '../../../Layout/Leftside'
 
+// import '../../assets/vendors/bootstrap/bootstrap.bundle.min';
+// import '../../assets/vendors/jquery/jquery-3.2.1.min';
+// import '../../assets'
 
 function Products() {
     const state = useContext(GlobalState)
@@ -61,7 +67,7 @@ function Products() {
     return (
         <>
         <Filters />
-        
+        {/* <Leftside /> */}
         {
             isAdmin && 
             <div className="delete-all">
@@ -81,8 +87,11 @@ function Products() {
         </div>
 
         <LoadMore />
-        {products.length === 0 && <Loading />}
+        {/* {products.length === 0 && <Loading />}  */}
+        {/* ken mafamesh produits : products.length ===0 wa9tha chargement <Loading /> doura dynamique*/}
+        <Footer />
         </>
+        
     )
 }
 
